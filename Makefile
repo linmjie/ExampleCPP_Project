@@ -1,31 +1,48 @@
+# Compiler
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -Wno-unused-parameter -fsanitize=address
-INCLUDES = -I./include/
 
-SRC_DIR := src
-BIN_DIR := bin
+# Compiler flags
+CXXFLAGS = -std=c++17 -Wall -Wextra -Wno-unused-parameter
 
-TARGET = $(BIN_DIR)/OUTPUT 
+# Enable AddressSanitizer on supported platforms
+ifeq ($(OS),Windows_NT)
+    EXE = .exe
+    MKDIR = mkdir -p
+    RM = rm -rf
+else
+    EXE =
+    MKDIR = mkdir -p
+    RM = rm -rf
+    CXXFLAGS += -fsanitize=address
+endif
+
+INCLUDES = -I./include
+
+SRC_DIR = src
+BIN_DIR = bin
+
+TARGET = $(BIN_DIR)/OUTPUT$(EXE)
+
 SRCS := $(wildcard $(SRC_DIR)/*.cpp)
-OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(BIN_DIR)/%.o, $(SRCS))
+OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(BIN_DIR)/%.o,$(SRCS))
+
+.PHONY: all run clean
 
 all: $(TARGET)
 
-run:
-	make all
+# Run the program
+run: $(TARGET)
 	./$(TARGET)
 
-# Link object files into the final executable
+# Link object files
 $(TARGET): $(OBJS)
-	@mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $^
 
-# Compile .cpp files to .o files in the bin directory
+# Compile source files
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(BIN_DIR)
+	@$(MKDIR) $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c -o $@ $<
 
+# Clean build files
 clean:
-	rm -rf $(BIN_DIR)
-
-.PHONY: all clean
+	$(RM) $(BIN_DIR)
