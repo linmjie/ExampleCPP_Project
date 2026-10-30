@@ -11,6 +11,10 @@ OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(BIN_DIR)/%.o, $(SRCS))
 
 all: $(TARGET)
 
+run:
+	make all
+	./$(TARGET)
+
 # Link object files into the final executable
 $(TARGET): $(OBJS)
 	@mkdir -p $(BIN_DIR)
