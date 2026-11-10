@@ -10,5 +10,8 @@ file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS
 
 add_executable(EXAMPLE_PROJECT "${MY_SOURCES}")
 
+target_compile_options(EXAMPLE_PROJECT PUBLIC -Wall -Wextra
+                       -Wno-unused-parameter)
+
 target_include_directories(EXAMPLE_PROJECT PUBLIC
                            "${CMAKE_CURRENT_SOURCE_DIR}/include/")

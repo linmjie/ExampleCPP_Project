@@ -3,8 +3,14 @@
 More robust documentation (potentially) later
  - include (.hpp) files in include/
  - source code (.cpp) files in src/
- - object (.o) files in bin/
- - exectuable (OUTPUT) file in bin/
-Configure the makefile yourself if you want to change the flags and stuff
-Run 'make' in your terminal to create the binary
-Run 'make clean' to clear the bin directory
+ - exectuable (EXAMPLE_PROJECT) file in bin/
+Configure the CMakeLists.txt yourself if you want to change the flags and stuff
+Run the following to build:
+```
+cmake .
+cmake --build .
+```
+Run the following to executable (configurable in the cmake configurations):
+```
+./bin/EXAMPLE_PROJECT
+```
