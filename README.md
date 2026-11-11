@@ -14,3 +14,7 @@ Run the following to executable (configurable in the cmake configurations):
 ```
 ./bin/EXAMPLE_PROJECT
 ```
+You can configure what compiler to use through cli flags:
+```
+cmake -B . -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+```
