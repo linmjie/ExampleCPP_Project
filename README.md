@@ -18,3 +18,7 @@ You can configure what compiler to use through cli flags:
 ```
 cmake -B . -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 ```
+You can configure the build system CMake uses through cli flags:
+```
+cmake -B . -G "MinGW Makefiles"
+```
