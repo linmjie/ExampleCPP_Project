@@ -2,4 +2,4 @@
 
 cmake -B .
 cmake --build .
-./bin/EXAMPLE_PROJECT
+./bin/"$1"
